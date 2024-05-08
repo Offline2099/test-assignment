@@ -13,6 +13,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { TicketsComponent } from './components/tickets/tickets.component';
 import { TicketComponent } from './components/ticket/ticket.component';
 
+import { FakeServer } from './fake-server/fake-server.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +31,7 @@ import { TicketComponent } from './components/ticket/ticket.component';
     EffectsModule.forRoot(),
   ],
   providers: [
+    provideAnimationsAsync(),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),
@@ -37,7 +40,7 @@ import { TicketComponent } from './components/ticket/ticket.component';
       traceLimit: 75,
       connectInZone: true
     }),
-    provideAnimationsAsync()
+    FakeServer
   ],
   bootstrap: [AppComponent]
 })
