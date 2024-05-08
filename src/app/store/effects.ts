@@ -27,3 +27,23 @@ export class UserEffects {
   );
   constructor(private actions$: Actions, private fakeServer: FakeServer) {}
 }
+
+@Injectable()
+export class TicketsEffects {
+  getTickets$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(appActions.getTickets),
+      mergeMap((action) => {
+        return this.fakeServer
+          .getTickets(action.userId)
+          .pipe(
+            map((tickets) => appActions.getTicketsSuccess({ tickets })),
+            catchError((error) => 
+              of(appActions.getTicketsFailure({ error: error.message }))
+            )
+          )
+      })
+    )
+  );
+  constructor(private actions$: Actions, private fakeServer: FakeServer) {}
+}
