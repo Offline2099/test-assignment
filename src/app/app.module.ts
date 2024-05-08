@@ -1,8 +1,13 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+
 import { AppComponent } from './app.component';
+
+
 
 @NgModule({
   declarations: [
@@ -10,9 +15,20 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: !isDevMode(),
+      autoPause: true,
+      trace: false,
+      traceLimit: 75,
+      connectInZone: true
+    })
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
