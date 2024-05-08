@@ -1,5 +1,6 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule, provideStore } from '@ngrx/store';
 import { EffectsModule, provideEffects } from '@ngrx/effects';
@@ -17,6 +18,12 @@ import { FakeServer } from './fake-server/fake-server.service';
 import { appEffects, appStore } from './store/store';
 import { UserEffects, TicketsEffects } from './store/effects';
 
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,11 +35,17 @@ import { UserEffects, TicketsEffects } from './store/effects';
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot(),
     EffectsModule.forFeature([UserEffects]),
     EffectsModule.forFeature([TicketsEffects]),
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     provideAnimationsAsync(),

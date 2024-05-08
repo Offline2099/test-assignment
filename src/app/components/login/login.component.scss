@@ -1,0 +1,40 @@
+:host {
+  display: flex;
+  flex-grow: 1;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+mat-card {
+  width: min(500px, 100% - 20px);
+  margin-top: 20vh;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+button {
+  width: 50%;
+  margin: 0 auto;
+  padding: 10px 0;
+  font-size: 20px;
+  &:not([disabled]) {
+    color: purple;
+    cursor: pointer;
+  }
+}
+
+mat-progress-spinner {
+  margin: 2px auto;
+}
+
+.error-message {
+  margin: 10px 0;
+  padding: 20px;
+  border-radius: 4px;
+  background: fade-out(red, .9);
+  color: maroon;
+}
