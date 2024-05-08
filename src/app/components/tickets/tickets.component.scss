@@ -1,0 +1,19 @@
+:host {
+  width: min(1000px, 100% - 20px);
+  margin: 20px auto;
+}
+
+th {
+  color: purple;
+}
+
+tr:hover td {
+  background: fade-out(purple, .8);;
+  transition: .3s;
+  cursor: pointer;
+}
+
+mat-progress-spinner {
+  margin: 50px auto;
+  opacity: .6;
+}
