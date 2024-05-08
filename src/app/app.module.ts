@@ -4,9 +4,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { AppComponent } from './app.component';
-
 
 
 @NgModule({
@@ -27,7 +27,8 @@ import { AppComponent } from './app.component';
       trace: false,
       traceLimit: 75,
       connectInZone: true
-    })
+    }),
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })
