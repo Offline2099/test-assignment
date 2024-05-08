@@ -1,0 +1,21 @@
+:host {
+  width: min(1000px, 100% - 20px);
+  margin: 20px auto;
+}
+
+mat-card {
+  padding-top: 20px;
+}
+
+p {
+  border-bottom: 1px dashed #aaa;
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+mat-card-title {
+  padding: 0 15px 10px 15px;
+  color: purple;
+  font-size: 18px;
+}
