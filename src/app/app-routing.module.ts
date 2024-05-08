@@ -7,10 +7,13 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { TicketsComponent } from './components/tickets/tickets.component';
 import { TicketComponent } from './components/ticket/ticket.component';
 
+import { RouteGuard } from './route-guard.service';
+
 const routes: Routes = [
   { 
     path: '', 
     component: HomeComponent,
+    canActivate:[RouteGuard],
     pathMatch: 'full'
   },
   { 
@@ -19,15 +22,18 @@ const routes: Routes = [
   },
   { 
     path: 'profile/:id', 
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate:[RouteGuard]
   },
   { 
     path: 'tickets', 
-    component: TicketsComponent
+    component: TicketsComponent,
+    canActivate:[RouteGuard]
   },
   { 
     path: 'ticket/:id', 
-    component: TicketComponent
+    component: TicketComponent,
+    canActivate:[RouteGuard]
   },
   { 
     path: '**', 
