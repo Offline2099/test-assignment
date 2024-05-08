@@ -1,8 +1,8 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
+import { StoreModule, provideStore } from '@ngrx/store';
+import { EffectsModule, provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
@@ -14,6 +14,8 @@ import { TicketsComponent } from './components/tickets/tickets.component';
 import { TicketComponent } from './components/ticket/ticket.component';
 
 import { FakeServer } from './fake-server/fake-server.service';
+import { appEffects, appStore } from './store/store';
+import { UserEffects, TicketsEffects } from './store/effects';
 
 @NgModule({
   declarations: [
@@ -29,9 +31,13 @@ import { FakeServer } from './fake-server/fake-server.service';
     AppRoutingModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot(),
+    EffectsModule.forFeature([UserEffects]),
+    EffectsModule.forFeature([TicketsEffects]),
   ],
   providers: [
     provideAnimationsAsync(),
+    provideStore(appStore),
+    provideEffects(appEffects),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),
