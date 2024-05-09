@@ -1,1 +1,48 @@
-<p>profile works!</p>
+<mat-card>
+  <p *ngFor="let section of profileSections">
+
+    <!-- Profile Section Title -->
+    <mat-card-title>
+      <span>{{section.name}}</span>
+      <button *ngIf="section.input" mat-icon-button type="button" (click)="toggleEditing(section)">
+        <mat-icon *ngIf="!section.editing">mode_edit</mat-icon>
+        <mat-icon *ngIf="section.editing">close</mat-icon>
+      </button>      
+    </mat-card-title>
+    
+    <!-- Profile Section Content -->
+    <mat-card-content>
+
+      <ng-container *ngIf="section.editing; then editing; else data"></ng-container>
+
+      <!-- Inputs (Editing Data) -->
+      <ng-template #editing>
+        <mat-form-field>
+
+          <!-- Text -->
+          <input *ngIf="section.type === 'text' && section.input" matInput type="text" [formControl]="section.input">
+
+          <!-- Select -->
+          <mat-select *ngIf="section.type === 'select' && section.input" [formControl]="section.input">
+            <mat-option *ngFor="let city of cities" [value]="city">{{city}}</mat-option>
+          </mat-select>
+
+          <!-- Date (won't work if wrapped in ng-container) -->
+          <input *ngIf="section.type === 'date' && section.input" matInput [matDatepicker]="picker" [formControl]="section.input">
+          <mat-hint *ngIf="section.type === 'date'">YYYY-MM-DD</mat-hint>
+          <mat-datepicker-toggle *ngIf="section.type === 'date'" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          
+        </mat-form-field>
+        <button *ngIf="section.input" mat-raised-button type="button" color="primary" (click)="submitEdit(section, section.input.value)">Save</button>
+      </ng-template>
+
+      <!-- Data (Inputs Hidden) -->
+      <ng-template #data>
+        {{section.content}}
+      </ng-template>
+
+    </mat-card-content>
+
+  </p>
+</mat-card>

@@ -20,10 +20,26 @@ import { UserEffects, TicketsEffects } from './store/effects';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
+import { DateAdapter, MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+
+const DATE_FORMAT = {
+  parse: {
+    dateInput: 'YYYY-MM-DD',
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
   declarations: [
@@ -44,6 +60,9 @@ import { MatTableModule } from '@angular/material/table';
     EffectsModule.forFeature([TicketsEffects]),
     MatCardModule,
     MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
@@ -61,7 +80,16 @@ import { MatTableModule } from '@angular/material/table';
       traceLimit: 75,
       connectInZone: true
     }),
-    FakeServer
+    FakeServer,
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE],
+    },
+    { 
+      provide: MAT_DATE_FORMATS,
+      useValue: DATE_FORMAT
+    }
   ],
   bootstrap: [AppComponent]
 })

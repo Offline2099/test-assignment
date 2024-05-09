@@ -1,0 +1,50 @@
+:host {
+  width: min(800px, 100% - 20px);
+  margin: 20px auto;
+}
+
+@mixin mobile {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+
+mat-card {
+  padding-top: 20px;
+}
+
+p {
+  border-bottom: 1px dashed #aaa;
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+mat-card-title {
+  position: relative;
+  padding: 0 15px 10px 15px;
+  color: purple;
+  font-size: 18px;
+  button {
+    position: absolute;
+    right: 20px;
+  }
+}
+
+mat-card-content {
+  display: flex;
+  align-items: center;
+  mat-form-field {
+    width: 460px;
+    @include mobile {
+      width: unset;
+      flex-grow: 1;
+    }
+  }
+  button {
+    margin-left: 20px;
+    @include mobile {
+      margin-left: 10px;
+    }
+  }
+}
