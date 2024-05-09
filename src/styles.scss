@@ -1,2 +1,19 @@
-html, body { height: 100%; min-width: 320px; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@use './app/shared.scss' as *;
+
+html, body {
+  height: 100%;
+  min-width: 340px; 
+}
+
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: 
+    repeating-linear-gradient(
+      -45deg,
+      fade-out($theme, .9) 0, fade-out($theme, .9) 20px, 
+      fade-out($theme, .8) 40px, fade-out($theme, .8) 60px, 
+      fade-out($theme, .9) 80px, fade-out($theme, .9) 100px
+    );
+  box-shadow: 0 0 300px 100px fade-out($theme, .6) inset;
+}

@@ -1,12 +1,8 @@
+@use '../../shared.scss' as *;
+
 :host {
   width: min(800px, 100% - 20px);
-  margin: 20px auto;
-}
-
-@mixin mobile {
-  @media (max-width: 600px) {
-    @content;
-  }
+  margin: 40px auto 20px auto;
 }
 
 mat-card {
@@ -23,7 +19,7 @@ p {
 mat-card-title {
   position: relative;
   padding: 0 15px 10px 15px;
-  color: purple;
+  color: $theme;
   font-size: 18px;
   button {
     position: absolute;

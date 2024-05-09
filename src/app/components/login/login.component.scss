@@ -1,3 +1,5 @@
+@use '../../shared.scss' as *;
+
 :host {
   display: flex;
   flex-grow: 1;
@@ -18,23 +20,20 @@ form {
 
 button {
   width: 50%;
+  height: 46px;
   margin: 0 auto;
   padding: 10px 0;
-  font-size: 20px;
-  &:not([disabled]) {
-    color: purple;
-    cursor: pointer;
-  }
+  font-size: 18px;
 }
 
 mat-progress-spinner {
-  margin: 2px auto;
+  margin: 0 auto;
 }
 
 .error-message {
   margin: 10px 0;
   padding: 20px;
   border-radius: 4px;
-  background: fade-out(red, .9);
+  background: fade-out($error, .9);
   color: maroon;
 }

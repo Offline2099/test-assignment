@@ -17,7 +17,7 @@
 
       <ng-container *ngIf="authLoading$ | async; then spinner else button"></ng-container>
       <ng-template #button>
-        <button mat-button-raised type="submit" color="primary" [disabled]="!loginForm.valid">Login</button>
+        <button mat-flat-button type="submit" color="primary" [disabled]="!loginForm.valid">Login</button>
       </ng-template>
       <ng-template #spinner>
         <button mat-button-raised type="submit" color="primary" [disabled]="true">

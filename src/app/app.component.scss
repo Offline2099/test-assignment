@@ -1,13 +1,9 @@
+@use './shared.scss' as *;
+
 :host {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-@mixin mobile {
-  @media (max-width: 600px) {
-    @content;
-  }
 }
 
 nav {
@@ -16,6 +12,8 @@ nav {
   justify-content: center;
   gap: 30px;
   padding: 15px;
+  background: white;
+  box-shadow: 0 0 12px 8px fade-out(black, .75);
   font-size: 20px;
   @include mobile {
     gap: 22px;
@@ -30,7 +28,7 @@ a {
   text-decoration: none;
   transition: .2s;
   &:hover {
-    color: purple;
+    color: $theme;
   }
 }
 

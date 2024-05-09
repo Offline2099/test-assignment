@@ -1,14 +1,16 @@
+@use '../../shared.scss' as *;
+
 :host {
   width: min(1000px, 100% - 20px);
-  margin: 20px auto;
+  margin: 40px auto 20px auto;
 }
 
 th {
-  color: purple;
+  color: $theme;
 }
 
 tr:hover td {
-  background: fade-out(purple, .8);;
+  background: fade-out($theme, .8);;
   transition: .3s;
   cursor: pointer;
 }
