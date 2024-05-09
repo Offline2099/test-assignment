@@ -1,1 +1,9 @@
-<p>home works!</p>
+<app-tickets
+  [homepageMode]="true"
+  (idOnClick)="selectTicketId($event)">
+</app-tickets>
+
+<app-ticket 
+  *ngIf="selectedTicketId"
+  [id]="selectedTicketId">
+</app-ticket>

@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  selectedTicketId: number = 0;
+
+  selectTicketId(id: number): void {
+    this.selectedTicketId = id;
+  }
 }

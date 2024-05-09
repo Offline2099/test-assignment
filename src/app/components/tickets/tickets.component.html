@@ -4,17 +4,17 @@
 
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>Ticket&nbsp;ID</th>
-    <td mat-cell *matCellDef="let ticket" routerLink="/ticket/{{ticket.id}}"> {{ticket.id}} </td>
+    <td mat-cell *matCellDef="let ticket" (click)="handleRowClick(ticket.id)"> {{ticket.id}} </td>
   </ng-container>
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let ticket" routerLink="/ticket/{{ticket.id}}"> {{ticket.name}} </td>
+    <td mat-cell *matCellDef="let ticket" (click)="handleRowClick(ticket.id)"> {{ticket.name}} </td>
   </ng-container>
 
   <ng-container matColumnDef="created">
     <th mat-header-cell *matHeaderCellDef>Created</th>
-    <td mat-cell *matCellDef="let ticket" routerLink="/ticket/{{ticket.id}}"> {{ticket.created}} </td>
+    <td mat-cell *matCellDef="let ticket" (click)="handleRowClick(ticket.id)"> {{ticket.created}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
