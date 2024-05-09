@@ -74,33 +74,33 @@ export class ProfileComponent {
     section.editing = !section.editing;
   }
 
-  submitEdit(seciton: ProfileSection, value: string): void {
+  submitEdit(seciton: ProfileSection): void {
     this.toggleEditing(seciton);
     switch (seciton.id) {
       case Profile.username:
         this.store.dispatch(appActions.updateUser({ 
-          user: { ...this.user!, username: value }
+          user: { ...this.user!, username: seciton.input?.value }
         }));
         break;
       case Profile.firstName:
         this.store.dispatch(appActions.updateUser({ 
-          user: { ...this.user!, firstName: value }
+          user: { ...this.user!, firstName: seciton.input?.value }
         }));
         break;
       case Profile.lastName:
         this.store.dispatch(appActions.updateUser({ 
-          user: { ...this.user!, lastName: value }
+          user: { ...this.user!, lastName: seciton.input?.value }
         }));
         break;
       case Profile.dateOfBirth:
         console.log();
         this.store.dispatch(appActions.updateUser({ 
-          user: { ...this.user!, created: moment(value).format('YYYY-MM-DD') }
+          user: { ...this.user!, created: moment(seciton.input?.value).format('YYYY-MM-DD') }
         }));
         break;
       case Profile.city:
         this.store.dispatch(appActions.updateUser({ 
-          user: { ...this.user!, city: value }
+          user: { ...this.user!, city: seciton.input?.value }
         }));
         break;
     }
