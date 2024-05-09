@@ -5,6 +5,13 @@ import { User } from './types/user.interface';
 import { AppState } from './store/types';
 import { userSelector } from './store/selectors';
 
+interface MenuItem {
+  id?: string;
+  text: string;
+  icon: string;
+  url: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,7 +22,7 @@ export class AppComponent {
   user$: Observable<User | null>;
   currentUser: User | null = null;
   
-  menuItems = [
+  menuItems: MenuItem[] = [
     { text: 'Home', icon: 'home', url: '/' },
     { text: 'Tickets', icon: 'commenting', url: '/tickets' },
     { id: 'profile', text: 'Profile', icon: 'manage_accounts', url: '' }

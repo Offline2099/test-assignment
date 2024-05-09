@@ -42,7 +42,7 @@ export class LoginComponent {
     this.passwordVisible = !this.passwordVisible;
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.loginForm.valid) {
       this.store.dispatch(appActions.authAttempt(this.loginForm.value));
     }

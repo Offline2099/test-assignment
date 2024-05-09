@@ -41,7 +41,7 @@ export class TicketsComponent {
     this.store.dispatch(appActions.getTickets({userId: this.currentUserId}));
   }
 
-  handleRowClick(id: number) {
+  handleRowClick(id: number): void {
     if (this.homepageMode) this.idOnClick.emit(id);
     else this.router.navigate(['/ticket/' + id]);
   }
