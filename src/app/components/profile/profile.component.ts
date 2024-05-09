@@ -5,6 +5,7 @@ import { Store, select } from '@ngrx/store';
 import { User } from '../../types/user.interface';
 import { AppState } from '../../store/types';
 import { userSelector } from '../../store/selectors';
+import * as appActions from '../../store/actions';
 import moment from 'moment';
 
 const enum Profile {
@@ -34,12 +35,18 @@ export class ProfileComponent {
 
   user$: Observable<User | null>;
   sub: Subscription;
+  user: User | null = null;
   profileSections: ProfileSection[] = [];
 
-   constructor(private store: Store<AppState>) {
+  cities: string[] = ['London', 'New York', 'Tokyo', 'Bangkok', 'Moscow'];
+
+  constructor(private store: Store<AppState>) {
     this.user$ = this.store.pipe(select(userSelector));
     this.sub = this.user$.subscribe(user => {
-      if (user) this.profileSections = this.fillProfileSections(user);
+      if (user) {
+        this.user = user;
+        this.profileSections = this.fillProfileSections(user);
+      }
     });
   }
 
@@ -50,10 +57,6 @@ export class ProfileComponent {
     type: ProfileSection['type'],
     input: ProfileSection['input']): ProfileSection => {
     return {id, name, content, type, input, editing: false}
-  }
-
-  toggleEditing(section: ProfileSection): void {
-    section.editing = !section.editing;
   }
 
   fillProfileSections = (u: User): ProfileSection[] => {
@@ -67,25 +70,38 @@ export class ProfileComponent {
     ];
   }
 
-  cities: string[] = ['London', 'New York', 'Tokyo', 'Bangkok', 'Moscow'];
+  toggleEditing(section: ProfileSection): void {
+    section.editing = !section.editing;
+  }
 
   submitEdit(seciton: ProfileSection, value: string): void {
     this.toggleEditing(seciton);
     switch (seciton.id) {
       case Profile.username:
-        console.log(value);
+        this.store.dispatch(appActions.updateUser({ 
+          user: { ...this.user!, username: value }
+        }));
         break;
       case Profile.firstName:
-        console.log(value);
+        this.store.dispatch(appActions.updateUser({ 
+          user: { ...this.user!, firstName: value }
+        }));
         break;
       case Profile.lastName:
-        console.log(value);
+        this.store.dispatch(appActions.updateUser({ 
+          user: { ...this.user!, lastName: value }
+        }));
         break;
       case Profile.dateOfBirth:
-        console.log(moment(value).format('YYYY-MM-DD'));
+        console.log();
+        this.store.dispatch(appActions.updateUser({ 
+          user: { ...this.user!, created: moment(value).format('YYYY-MM-DD') }
+        }));
         break;
       case Profile.city:
-        console.log(value);
+        this.store.dispatch(appActions.updateUser({ 
+          user: { ...this.user!, city: value }
+        }));
         break;
     }
   }
