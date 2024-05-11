@@ -1,8 +1,12 @@
-<nav *ngIf="currentUser">
-  <a *ngFor="let item of menuItems" routerLink="{{item.url}}">
-    <mat-icon>{{item.icon}}</mat-icon>
-    <span>{{item.text}}</span>
-  </a>
-</nav>
+@if (currentUser) {
+  <nav>
+    @for (item of menuItems; track $index) {
+      <a routerLink="{{item.url}}">
+        <mat-icon>{{item.icon}}</mat-icon>
+        <span>{{item.text}}</span>
+      </a>
+    }
+  </nav>
+}
 
 <router-outlet />

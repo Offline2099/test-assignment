@@ -1,9 +1,5 @@
-<app-tickets
-  [homepageMode]="true"
-  (idOnClick)="selectTicketId($event)">
-</app-tickets>
+<app-tickets [homepageMode]="true" (idOnClick)="selectTicketId($event)" />
 
-<app-ticket 
-  *ngIf="selectedTicketId"
-  [id]="selectedTicketId">
-</app-ticket>
+@if (selectedTicketId) {
+  <app-ticket [id]="selectedTicketId" />
+}

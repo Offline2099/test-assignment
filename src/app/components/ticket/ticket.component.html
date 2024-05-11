@@ -1,9 +1,12 @@
-<ng-container *ngIf="!ticket">Ticket not found.</ng-container>
-<ng-container *ngIf="ticket">
+@if (ticket) {
   <mat-card>
-    <p *ngFor="let section of ticketSections">
-      <mat-card-title>{{section.name}}</mat-card-title>
-      <mat-card-content>{{section.content}}</mat-card-content>
-    </p>
+    @for (section of ticketSections; track $index) {
+      <p>
+        <mat-card-title>{{section.name}}</mat-card-title>
+        <mat-card-content>{{section.content}}</mat-card-content>
+      </p>
+    }
   </mat-card>
-</ng-container>
+} @else {
+  <div>Ticket not found.</div>
+}

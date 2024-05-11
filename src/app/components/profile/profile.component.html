@@ -1,48 +1,53 @@
 <mat-card>
-  <p *ngFor="let section of profileSections">
+  @for (section of profileSections; track section.id) {
+    <p>
 
-    <!-- Profile Section Title -->
-    <mat-card-title>
-      <span>{{section.name}}</span>
-      <button *ngIf="section.input" mat-icon-button type="button" (click)="toggleEditing(section)">
-        <mat-icon *ngIf="!section.editing">mode_edit</mat-icon>
-        <mat-icon *ngIf="section.editing">close</mat-icon>
-      </button>      
-    </mat-card-title>
-    
-    <!-- Profile Section Content -->
-    <mat-card-content>
+      <!-- Profile Section Title -->
+      <mat-card-title>
+        <span>{{section.name}}</span>
+        @if (section.input) {
+          <button mat-icon-button type="button" (click)="toggleEditing(section)">
+            @if (section.editing) {
+              <mat-icon>close</mat-icon>
+            } @else {
+              <mat-icon>mode_edit</mat-icon>
+            }            
+          </button>
+        }
+      </mat-card-title>
+      
+      <!-- Profile Section Content -->
+      <mat-card-content>
+        @if (section.editing && section.input) {
 
-      <ng-container *ngIf="section.editing; then editing; else data"></ng-container>
+          <!-- Inputs (Editing Data) -->
+          <mat-form-field>
+            @if (section.type === 'text') {
+              <input matInput type="text" [formControl]="section.input">
+            }
+            @if (section.type === 'select') {
+              <mat-select [formControl]="section.input">
+                @for (city of cities; track $index) {
+                  <mat-option [value]="city">{{city}}</mat-option>
+                }
+              </mat-select>
+            }
+            <!-- This one won't display correctly if wrapped in modern @if syntax -->
+            <input *ngIf="section.type === 'date'" matInput [matDatepicker]="picker" [formControl]="section.input">
+            <mat-hint *ngIf="section.type === 'date'">YYYY-MM-DD</mat-hint>
+            <mat-datepicker-toggle *ngIf="section.type === 'date'" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
 
-      <!-- Inputs (Editing Data) -->
-      <ng-template #editing>
-        <mat-form-field>
+          </mat-form-field>
+          <button mat-raised-button type="button" color="primary" (click)="submitEdit(section)">Save</button>
 
-          <!-- Text -->
-          <input *ngIf="section.type === 'text' && section.input" matInput type="text" [formControl]="section.input">
+        } @else {
+          <!-- Data (Inputs Hidden) -->
+          {{section.content}}
+        }
 
-          <!-- Select -->
-          <mat-select *ngIf="section.type === 'select' && section.input" [formControl]="section.input">
-            <mat-option *ngFor="let city of cities" [value]="city">{{city}}</mat-option>
-          </mat-select>
+      </mat-card-content>
 
-          <!-- Date (won't work if wrapped in ng-container) -->
-          <input *ngIf="section.type === 'date' && section.input" matInput [matDatepicker]="picker" [formControl]="section.input">
-          <mat-hint *ngIf="section.type === 'date'">YYYY-MM-DD</mat-hint>
-          <mat-datepicker-toggle *ngIf="section.type === 'date'" matIconSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-          
-        </mat-form-field>
-        <button *ngIf="section.input" mat-raised-button type="button" color="primary" (click)="submitEdit(section)">Save</button>
-      </ng-template>
-
-      <!-- Data (Inputs Hidden) -->
-      <ng-template #data>
-        {{section.content}}
-      </ng-template>
-
-    </mat-card-content>
-
-  </p>
+    </p>
+  }
 </mat-card>
