@@ -21,24 +21,28 @@
         @if (section.editing && section.input) {
 
           <!-- Inputs (Editing Data) -->
-          <mat-form-field>
-            @if (section.type === 'text') {
+          @if (section.type === 'text') {
+            <mat-form-field>
               <input matInput type="text" [formControl]="section.input">
-            }
-            @if (section.type === 'select') {
+            </mat-form-field>
+          }
+          @if (section.type === 'select') {
+            <mat-form-field>
               <mat-select [formControl]="section.input">
                 @for (city of cities; track $index) {
                   <mat-option [value]="city">{{city}}</mat-option>
                 }
               </mat-select>
-            }
-            <!-- This one won't display correctly if wrapped in modern @if syntax -->
-            <input *ngIf="section.type === 'date'" matInput [matDatepicker]="picker" [formControl]="section.input">
-            <mat-hint *ngIf="section.type === 'date'">YYYY-MM-DD</mat-hint>
-            <mat-datepicker-toggle *ngIf="section.type === 'date'" matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-
-          </mat-form-field>
+            </mat-form-field>
+          }
+          @if (section.type === 'date') {
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" [formControl]="section.input">
+              <mat-hint>YYYY-MM-DD</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          }
           <button mat-raised-button type="button" color="primary" (click)="submitEdit(section)">Save</button>
 
         } @else {
